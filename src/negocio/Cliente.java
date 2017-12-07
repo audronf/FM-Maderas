@@ -1,4 +1,4 @@
-package negocio;
+package negocio; // No entiendo nada xd
 
 public class Cliente {
 
