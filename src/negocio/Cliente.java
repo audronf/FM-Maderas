@@ -1,4 +1,4 @@
-package negocio; // No entiendo nada xd
+package negocio; // Testeo de branches
 
 public class Cliente {
 
