@@ -1,16 +1,19 @@
 package negocio;
 
+import dao.VentaDao;
+import excepciones.ConnectionException;
+import excepciones.VentaException;
+
+// asd
 public class ItemVenta {
 
 	private Producto producto;
 	private int cantidad;
-	private Venta venta;
 	
-	public ItemVenta(Producto producto, int cantidad, Venta venta) {
+	public ItemVenta(Producto producto, int cantidad) {
 		super();
 		this.producto = producto;
 		this.cantidad = cantidad;
-		this.venta = venta;
 	}
 	
 	public Producto getProducto() {
@@ -25,11 +28,10 @@ public class ItemVenta {
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
-	public Venta getVenta() {
-		return venta;
-	}
-	public void setVenta(Venta venta) {
-		this.venta = venta;
+
+	public void save(Venta v) throws ConnectionException, VentaException {
+		VentaDao.getInstance().saveIV(this, v);
+		
 	}
 	
 	

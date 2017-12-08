@@ -11,12 +11,12 @@ public class Venta {
 	private float precioReal;
 	private LocalDate fecha;
 	
-	public Venta(int numero, Cliente comprador, Vector<ItemVenta> itemsVenta, float precioReal) {
+	public Venta(Cliente comprador, Vector<ItemVenta> itemsVenta, float precioReal) {
 		super();
-		this.numero = numero;
 		this.comprador = comprador;
 		this.itemsVenta = itemsVenta;
 		this.precioReal = precioReal;
+		this.fecha = LocalDate.now();
 	}
 
 	public int getNumero() {
@@ -58,6 +58,9 @@ public class Venta {
 	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
+
+		
+
 	
 	
 }
