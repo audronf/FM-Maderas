@@ -12,7 +12,7 @@ public class Venta {
 	private LocalDate fecha;
 	
 	public Venta(Cliente comprador) {
-		super();
+		super(); 
 		this.comprador = comprador;
 		this.itemsVenta = new Vector<ItemVenta>();
 		this.fecha = LocalDate.now();
