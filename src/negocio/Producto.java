@@ -1,5 +1,9 @@
 package negocio;
 
+import dao.ProductoDao;
+import excepciones.ConnectionException;
+import excepciones.ProductoException;
+
 public class Producto {
 
 	private String codigo;
@@ -55,6 +59,13 @@ public class Producto {
 	public void setCosto(float costo) {
 		this.costo = costo;
 	}
-	
+	public void save() throws ConnectionException, ProductoException {
+		ProductoDao.getInstance().save(this);
+		
+	}
+	public void update() throws ConnectionException, ProductoException {
+		ProductoDao.getInstance().update(this);
+		
+	}	
 	
 }
