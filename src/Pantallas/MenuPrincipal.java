@@ -1,18 +1,10 @@
-package Pantallas;
+package pantallas;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
-import javax.swing.border.BevelBorder;
-import javax.swing.ListSelectionModel;
-import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.UIManager;
 import java.awt.Color;
@@ -22,16 +14,12 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
-import javax.swing.ImageIcon;
 
 public class MenuPrincipal {
 
 	private JFrame frmPrototipo;
 	private JButton btnClientes;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -45,20 +33,18 @@ public class MenuPrincipal {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
+
 	public MenuPrincipal() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+
+	@SuppressWarnings({ "unchecked", "rawtypes", "serial" })
 	private void initialize() {
 		frmPrototipo = new JFrame();
+		frmPrototipo.setResizable(false);
 		frmPrototipo.setTitle("Prototipo");
-		frmPrototipo.setIconImage(Toolkit.getDefaultToolkit().getImage(MenuPrincipal.class.getResource("/com/sun/java/swing/plaf/windows/icons/Warn.gif")));
+		frmPrototipo.setIconImage(Toolkit.getDefaultToolkit().getImage(MenuPrincipal.class.getResource("/javax/swing/plaf/basic/icons/JavaCup16.png")));
 		
 		frmPrototipo.getContentPane().setBackground(UIManager.getColor("Button.highlight"));
 		frmPrototipo.setBounds(100, 100, 808, 540);
@@ -81,12 +67,12 @@ public class MenuPrincipal {
 		frmPrototipo.getContentPane().add(btnProductos);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(467, 43, 315, 447);
+		scrollPane.setBounds(467, 43, 325, 457);
 		frmPrototipo.getContentPane().add(scrollPane);
 		
 		JList list = new JList();
 		list.setModel(new AbstractListModel() {
-			String[] values = new String[] {"asd", "as", "da", "sd", "asd", "sa", "dsa", "d", "sad", "sa", "dsa", "d", "asd", "as", "d", "asd", "as", "d", "asd", "as", "d", "asd", "as", "d", "asd", "as", "d", "asd", "as", "d", "asd", "as", "das"};
+			String[] values = new String[] {};
 			public int getSize() {
 				return values.length;
 			}
