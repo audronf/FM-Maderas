@@ -8,7 +8,7 @@ import excepciones.ConnectionException;
 
 public class AdminConexion {
 
-	private static AdminConexion instancia; //Singleton 
+	private static AdminConexion instancia; 
 	
 	private AdminConexion() throws ConnectionException{
 		try {

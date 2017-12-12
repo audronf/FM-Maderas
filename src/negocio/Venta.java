@@ -1,20 +1,25 @@
 package negocio;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Vector;
+
+import dao.VentaDao;
+import excepciones.ConnectionException;
+import excepciones.VentaException;
 
 public class Venta {
 
 	private int numero;
 	private Cliente comprador;
-	private Vector<ItemVenta> itemsVenta;
+	private List<ItemVenta> itemsVenta;
 	private float precioReal;
 	private LocalDate fecha;
 	
-	public Venta(Cliente comprador, Vector<ItemVenta> itemsVenta, float precioReal) {
+	public Venta(Cliente comprador, List<ItemVenta> items, float precioReal) {
 		super();
 		this.comprador = comprador;
-		this.itemsVenta = itemsVenta;
+		this.itemsVenta = items;
 		this.precioReal = precioReal;
 		this.fecha = LocalDate.now();
 	}
@@ -35,11 +40,11 @@ public class Venta {
 		this.comprador = comprador;
 	}
 
-	public Vector<ItemVenta> getItemsVenta() {
+	public List<ItemVenta> getItemsVenta() {
 		return itemsVenta;
 	}
 
-	public void setItemsVenta(Vector<ItemVenta> itemsVenta) {
+	public void setItemsVenta(List<ItemVenta> itemsVenta) {
 		this.itemsVenta = itemsVenta;
 	}
 
@@ -59,7 +64,17 @@ public class Venta {
 		this.fecha = fecha;
 	}
 
-		
+	public void save() throws ConnectionException, VentaException
+	{
+		VentaDao.getInstance().save(this);
+	}
+	public void saveIV() throws ConnectionException, VentaException
+	{
+		for(ItemVenta iv : itemsVenta)
+		{
+			iv.save(this);
+		}
+	}
 
 	
 	
