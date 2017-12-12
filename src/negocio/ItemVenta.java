@@ -3,6 +3,7 @@ package negocio;
 import dao.VentaDao;
 import excepciones.ConnectionException;
 import excepciones.VentaException;
+import views.ItemVentaView;
 
 // asd
 public class ItemVenta {
@@ -32,6 +33,11 @@ public class ItemVenta {
 	public void save(Venta v) throws ConnectionException, VentaException {
 		VentaDao.getInstance().saveIV(this, v);
 		
+	}
+	public ItemVentaView toView()
+	{
+		ItemVentaView ivv=new ItemVentaView(producto,cantidad);
+		return ivv;
 	}
 	
 	

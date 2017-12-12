@@ -3,6 +3,7 @@ package negocio;
 import dao.ProductoDao;
 import excepciones.ConnectionException;
 import excepciones.ProductoException;
+import views.ProductoView;
 
 public class Producto {
 
@@ -67,5 +68,9 @@ public class Producto {
 		ProductoDao.getInstance().update(this);
 		
 	}	
-	
+	public ProductoView toView()
+	{
+		ProductoView pv= new ProductoView(codigo, nombre, categoria, precioEspVenta, precioCarpinteros, costo);
+		return pv;
+	}
 }

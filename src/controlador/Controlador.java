@@ -1,9 +1,20 @@
 package controlador;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import dao.ClienteDao;
 import dao.ProductoDao;
+import excepciones.ClienteException;
 import excepciones.ConnectionException;
 import excepciones.ProductoException;
+import excepciones.VentaException;
+import negocio.Cliente;
+import negocio.ItemVenta;
 import negocio.Producto;
+import negocio.Venta;
+import views.ItemVentaView;
+import views.ProductoView;
 
 public class Controlador {
     private static Controlador instancia;
@@ -35,11 +46,39 @@ public class Controlador {
     	p.update();
     }
     // VENTAS
-    public void registrarVenta()//No tengo ni la menor idea qué tendría como parámetro este método, tiene que ser lo que reciba de la pantallas
-    							// el cuit del cliente seguro pero también tiene que tener la lista de productos con sus respectivdas cantidades.
-    							// Cuando hagamos la pantalla de registrar ventas si es que la hacemos lo termino de hacer.
+    public void registrarVenta(String cuit, List<List<String>> CodCant, String precio) throws ConnectionException, ProductoException, ClienteException, VentaException
     {
-    	//TODO
+    	List<ItemVenta> items= new ArrayList<ItemVenta>();
+    	for(List<String> lista: CodCant)
+    	{
+    		Producto p=ProductoDao.getInstance().findByID(lista.get(0));
+    		int cant = Integer.valueOf(lista.get(1));
+    		ItemVenta iv= new ItemVenta(p,cant);
+    		items.add(iv);
+    	}
+    	Cliente c = ClienteDao.getInstance().findByCuit(cuit);
+    	Venta v = new Venta(c, items, Float.valueOf(precio));
+    	v.save();
+    	v.saveIV();
     }
+	public List<ProductoView> obtenerProductosBasicos() throws ConnectionException, ProductoException {
+		List<Producto> productos=ProductoDao.getInstance().Basicos();
+		List<ProductoView> resultado= new ArrayList<ProductoView>();
+		for(Producto r : productos)
+			resultado.add(r.toView());
+		return resultado;
+	}
+	public List<ProductoView> obtenerProductosMedida() throws ConnectionException, ProductoException {
+		List<Producto> productos=ProductoDao.getInstance().Medida();
+		List<ProductoView> resultado= new ArrayList<ProductoView>();
+		for(Producto r : productos)
+			resultado.add(r.toView());
+		return resultado;
+	}
+	public ItemVentaView obtenerItemView(String codigo, String cantidad) throws ConnectionException, ProductoException {
+		Producto p=ProductoDao.getInstance().findByID(codigo);
+		ItemVenta iv= new ItemVenta(p, Integer.valueOf(cantidad));
+		return iv.toView();
+	}
     
 }

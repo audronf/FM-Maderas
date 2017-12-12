@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import excepciones.ConnectionException;
 import excepciones.ProductoException;
 import negocio.Producto;
@@ -81,4 +84,51 @@ public class ProductoDao {
 		}
 
 	}
+
+	public List<Producto> Basicos() throws ConnectionException, ProductoException {
+		Connection con = AdminConexion.getInstance().obtenerConexion();
+		List<Producto> resultado = new ArrayList<Producto>();
+		Producto p;
+		try{
+			PreparedStatement stm = con.prepareStatement("select * from Productos where categoria='Basico'");
+			stm.setString(1, "Basico");
+			ResultSet rs = stm.executeQuery();
+			rs.next();
+			while(rs.getRow()!=0)
+			{
+				p = new Producto(rs.getString("codigo"), rs.getString("nombre"), rs.getString("categoria"), rs.getFloat("precioEsperado"), rs.getFloat("precioCarpinteros"), rs.getFloat("costoAlDia"));
+				resultado.add(p);
+				rs.next();
+			}
+			return resultado;
+
+		}
+		catch(SQLException e){
+			throw new ProductoException("Error al recuperar los productos");
+		}
+
+	}
+	public List<Producto> Medida() throws ConnectionException, ProductoException {
+		Connection con = AdminConexion.getInstance().obtenerConexion();
+		List<Producto> resultado = new ArrayList<Producto>();
+		Producto p;
+		try{
+			PreparedStatement stm = con.prepareStatement("select * from Productos where categoria='Con Medida'");
+			ResultSet rs = stm.executeQuery();
+			rs.next();
+			while(rs.getRow()!=0)
+			{
+				p = new Producto(rs.getString("codigo"), rs.getString("nombre"), rs.getString("categoria"), rs.getFloat("precioEsperado"), rs.getFloat("precioCarpinteros"), rs.getFloat("costoAlDia"));
+				resultado.add(p);
+				rs.next();
+			}
+			return resultado;
+
+		}
+		catch(SQLException e){
+			throw new ProductoException("Error al recuperar los productos");
+		}
+
+	}
 }
+
